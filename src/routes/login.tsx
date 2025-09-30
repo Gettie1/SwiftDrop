@@ -1,6 +1,9 @@
 import { useForm } from '@tanstack/react-form'
-import { createFileRoute } from '@tanstack/react-router'
+import { Link, createFileRoute, useRouter } from '@tanstack/react-router'
 import { z } from 'zod'
+import { toast } from 'sonner'
+import { useLogin } from '@/hooks/auth'
+import { authActions } from '@/store/authStore'
 
 export const Route = createFileRoute('/login')({
   component: RouteComponent,
@@ -23,23 +26,33 @@ function validateField<T>(value: T, schema: z.ZodSchema<T>) {
 }
 
 function RouteComponent() {
+  const mutate = useLogin()
+  const router = useRouter()
   const form = useForm({
     defaultValues: {
       email: '',
       password: '',
     } as FormData,
     onSubmit: ({ value }) => {
-      const result = formSchema.safeParse(value)
-      if (!result.success) {
-        const errors = result.error.errors.map((err) => err.message)
-        console.log('Validation errors:', errors)
-        return
-      }
-      const values = result.data
-      console.log('Form submitted:', values)
-      alert(`Logged in with email: ${values.email}`) // Simulate login action
+      mutate.mutate(value, {
+        onSuccess: (data) => {
+          authActions.setUser({
+            isAuthenticated: data.isAuthenticated,
+            user: data.user,
+            accessToken: data.accessToken,
+            refreshToken: data.refreshToken,
+          })
+          toast.success(`Login successful!, Welcome, ${data.user.username}!`)
+          router.navigate({ to: '/dashboard/dashboard/' as any })
+        },
+        onError: (error) => {
+          alert(`Login failed: ${error.message}`)
+          toast.error(`Login failed: ${error.message}`)
+        },
+      })
     },
   })
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-green-100 to-blue-100 p-4">
       <div className="w-full max-w-md p-8 rounded-xl backdrop-blur-md bg-white/50 shadow-xl border-8 border-white/10">
@@ -127,6 +140,26 @@ function RouteComponent() {
             />
           </div>
         </form>
+        <div className="mt-4">
+          <p className="text-center text-gray-600">
+            Don't have an account?{' '}
+            <Link
+              to="/register"
+              className="text-blue-500 hover:underline font-semibold"
+            >
+              Register
+            </Link>
+          </p>
+          {/* <p className="text-center text-gray-600">
+            Forgot your password?{' '}
+            <Link
+              to="/reset-password"
+              className="text-purple-600 hover:underline font-semibold"
+            >
+              Reset Password
+            </Link>
+          </p> */}
+        </div>
       </div>
     </div>
   )

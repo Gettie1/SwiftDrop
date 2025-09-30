@@ -1,5 +1,6 @@
 import { Link, createFileRoute } from '@tanstack/react-router'
 import swiflogo from '../swiflogo.jpg'
+import Header from '@/components/Header'
 
 export const Route = createFileRoute('/')({
   component: LandingPage,
@@ -8,6 +9,7 @@ export const Route = createFileRoute('/')({
 function LandingPage() {
   return (
     <div className="font-sans">
+      <Header />
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-center py-20 px-4">
         <div className="max-w-3xl mx-auto">

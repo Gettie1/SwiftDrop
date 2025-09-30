@@ -1,4 +1,4 @@
-import { Home } from "lucide-react";
+import { Bell, Book, Home, Settings, Ship, User2 } from "lucide-react";
 import { Role } from "../types/auth";
 
 const navLinks = [
@@ -6,21 +6,21 @@ const navLinks = [
         label: 'Admin',
         links: [
             { to: '/admin/dashboard', icon: Home, title: 'Dashboard' },
-            { to: '/admin/users', icon: Home, title: 'Users' },
-            { to: '/admin/deliveries', icon: Home, title: 'Deliveries' },
-            { to: '/admin/reports', icon: Home, title: 'Reports' },
-            { to: '/admin/settings', icon: Home, title: 'Settings' },
+            { to: '/admin/users', icon: User2, title: 'Users' },
+            { to: '/admin/deliveries', icon: Ship, title: 'Deliveries' },
+            { to: '/admin/reports', icon: Book, title: 'Reports' },
+            { to: '/admin/settings', icon: Settings, title: 'Settings' },
         ]
     },
     {
         label: 'Customer',
         links: [
-            { to: '/customer/orders', icon: Home, title: 'Orders' },
+            { to: '/customer/orders', icon: Ship, title: 'Orders' },
             { to: '/customer/cart', icon: Home, title: 'Cart' },
-            { to: '/customer/profile', icon: Home, title: 'Profile' },
-            { to: '/customer/payments', icon: Home, title: 'Payments' },
-            { to: '/customer/notifications', icon: Home, title: 'Notifications' },
-            { to: '/customer/settings', icon: Home, title: 'Settings' },
+            { to: '/customer/profile', icon: User2, title: 'Profile' },
+            { to: '/customer/payments', icon: Ship, title: 'Payments' },
+            { to: '/customer/notifications', icon: Bell, title: 'Notifications' },
+            { to: '/customer/settings', icon: Settings, title: 'Settings' },
         ]
     },
     {
@@ -31,11 +31,11 @@ const navLinks = [
             { to: '/courier/deliveries', icon: Home, title: 'Deliveries' },
             { to: '/courier/profile', icon: Home, title: 'Profile' },
             { to: '/courier/notifications', icon: Home, title: 'Notifications' },
-            { to: '/courier/settings', icon: Home, title: 'Settings' },
+            { to: '/courier/settings', icon: Settings, title: 'Settings' },
         ]
     }
 ];
-
+    
 export const checkRole = (userRole: string) => {
     switch (userRole) {
         case Role.ADMIN:

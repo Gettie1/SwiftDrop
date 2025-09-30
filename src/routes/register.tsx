@@ -1,6 +1,10 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { Link, createFileRoute, useRouter } from '@tanstack/react-router'
 import { useForm } from '@tanstack/react-form'
 import { z } from 'zod'
+import { toast } from 'sonner'
+import { useMutation } from '@tanstack/react-query'
+import axios from 'axios'
+import { useRegister } from '@/hooks/auth'
 
 export const Route = createFileRoute('/register')({
   component: RegisterForm,
@@ -10,9 +14,10 @@ const schema = z.object({
   // profile user creation schema
   firstName: z.string().min(1, 'First name is required'),
   lastName: z.string().min(1, 'Last name is required'),
+  username: z.string().min(1, 'Username is required'),
   email: z.string().email('Invalid email address'),
   password: z.string().min(6, 'Password must be at least 6 characters long'),
-  phone: z.string().min(10, 'Phone number must be at least 10 digits long'),
+  phoneNumber: z.string().min(10, 'Phone number must be at least 10 digits long'),
   address: z.string().min(1, 'Address is required'),
   role: z.enum(['customer', 'admin', 'courier'], {
     required_error: 'Role is required',
@@ -35,13 +40,16 @@ const getErrorMessage = (error: any): string => {
 }
 
 function RegisterForm() {
+  const registrationMutation = useRegister()
+  const router = useRouter()
   const form = useForm({
     defaultValues: {
       firstName: '',
       lastName: '',
+      username: '',
       email: '',
       password: '',
-      phone: '',
+      phoneNumber: '',
       address: '',
       role: 'customer',
     } as FormData,
@@ -49,9 +57,39 @@ function RegisterForm() {
       onBlur: schema,
     },
     onSubmit: ({ value }) => {
-      console.log(value)
-      // Show success message
-      alert('Account created successfully!')
+     createUserWithProfile.mutate(value)
+    },
+  })
+  const createUserWithProfile = useMutation({
+    mutationFn: async (data: FormData) => {
+      // 1️⃣ Create user
+      const userRes = await axios.post('http://localhost:4001/users', {
+        username: data.username,
+        email: data.email,
+        password: data.password,
+        role: data.role,
+      })
+
+      const userId = userRes.data.id
+
+      // 2️⃣ Create profile with firstname, lastname, address, phonenumber
+      const profileRes = await axios.post('http://localhost:4001/profile', {
+        userId,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        address: data.address,
+        phoneNumber: data.phoneNumber,
+      })
+
+      return profileRes.data
+    },
+    onSuccess: () => {
+      toast.success('Account created successfully!')
+      form.reset()
+      router.navigate({ to: '/login' })
+    },
+    onError: (err: any) => {
+      toast.error(`Failed: ${err.response?.data?.message || err.message || 'Something went wrong'}`)
     },
   })
 
@@ -67,6 +105,34 @@ function RegisterForm() {
           className="space-y-4"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <form.Field
+              name="username"
+              validators={{
+                onChange: ({ value }) =>
+                  validateField(value, schema.shape.username),
+                onBlur: ({ value }) =>
+                  validateField(value, schema.shape.username),
+              }}
+              children={(field) => (
+                <div>
+                  <label className="block mb-1 font-semibold">Username</label>
+                  <input
+                    type="text"
+                    name="username"
+                    value={field.state.value}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                    onBlur={field.handleBlur}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
+                    placeholder="Enter your username"
+                  />
+                  {field.state.meta.errors.length > 0 && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {getErrorMessage(field.state.meta.errors[0])}
+                    </p>
+                  )}
+                </div>
+              )}
+            />
             <form.Field
               name="firstName"
               validators={{
@@ -123,6 +189,7 @@ function RegisterForm() {
                 </div>
               )}
             />
+
             <form.Field
               name="email"
               validators={{
@@ -178,12 +245,12 @@ function RegisterForm() {
                 </div>
               )}
             />
-            <form.Field
-              name="phone"
+           <form.Field
+              name="phoneNumber"
               validators={{
                 onChange: ({ value }) =>
-                  validateField(value, schema.shape.phone),
-                onBlur: ({ value }) => validateField(value, schema.shape.phone),
+                  validateField(value, schema.shape.phoneNumber),
+                onBlur: ({ value }) => validateField(value, schema.shape.phoneNumber),
               }}
               children={(field) => (
                 <div>
@@ -232,7 +299,7 @@ function RegisterForm() {
                   )}
                 </div>
               )}
-            />
+            /> 
             <form.Field
               name="role"
               validators={{
@@ -265,11 +332,35 @@ function RegisterForm() {
           </div>
           <button
             type="submit"
-            className="w-full bg-purple-500 text-white py-2 px-4 rounded-md hover:bg-purple-600 transition-colors"
+            disabled={registrationMutation.isPending}
+            className="w-full bg-purple-500 text-white py-2 px-4 rounded-md hover:bg-purple-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Register
+            {registrationMutation.isPending
+              ? 'Creating Account...'
+              : 'Register'}
           </button>
         </form>
+        <div className="mt-4">
+          <p className="text-center text-gray-600">
+            Already have an account?{' '}
+            <Link
+              to="/login"
+              className="text-purple-600 hover:underline font-semibold"
+            >
+              Login
+            </Link>
+          </p>
+
+          {/* <p className="text-center text-gray-600">
+            Forgot your password?{' '}
+            <Link
+              to="/reset-password"
+              className="text-purple-600 hover:underline font-semibold"
+            >
+              Reset Password
+            </Link>
+          </p> */}
+        </div>
       </div>
     </div>
   )

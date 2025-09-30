@@ -3,3 +3,28 @@ export enum Role  {
     CUSTOMER = 'customer',
     COURIER = 'courier',
 }
+export interface loginData {
+    email: string;
+    password: string;
+}
+export interface LoginResponse {
+    user:{
+        id: string;
+        username: string;
+        email: string;
+        role: Role | string;
+    };
+    isAuthenticated: boolean;
+    accessToken?: string;
+    refreshToken?: string;
+}
+export interface RegisterData {
+    firstName: string;
+    lastName: string;
+    address: string;
+    phoneNumber: string;
+    username: string;
+    email: string;
+    password: string;
+    role: Role | string;
+}
