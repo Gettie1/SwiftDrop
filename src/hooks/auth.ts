@@ -15,7 +15,7 @@ export const useLogin = () => {
   })
 }
 export const useRegister = () => {
-  return useMutation<LoginResponse, Error, RegisterData>({
+  return useMutation<{ user: any; profile: any }, Error, RegisterData>({
     mutationKey: ['register'],
     mutationFn: register,
     onSuccess: (data) => {

@@ -34,7 +34,18 @@ export const getProfileByUserId = async (userId: string) => {
   return response.json()
 }
 
-export const updateProfile = async (
+export const getAllProfiles = async () => {
+  const response = await fetch(`${url}/profiles`, {
+    method: 'GET',
+    headers: getHeaders(),
+  })
+  if (!response.ok) {
+    throw new Error('Failed to fetch profiles')
+  }
+  return response.json()
+}
+
+export const getUpdateProfile = async (
   profileId: string,
   profileData: Partial<ProfileData>,
 ) => {

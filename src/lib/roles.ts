@@ -5,11 +5,11 @@ const navLinks = [
     {
         label: 'Admin',
         links: [
-            { to: '/admin/dashboard', icon: Home, title: 'Dashboard' },
-            { to: '/admin/users', icon: User2, title: 'Users' },
-            { to: '/admin/deliveries', icon: Ship, title: 'Deliveries' },
-            { to: '/admin/reports', icon: Book, title: 'Reports' },
-            { to: '/admin/settings', icon: Settings, title: 'Settings' },
+            { to: '/dashboard/dashboard/', icon: Home, title: 'Dashboard' },
+            { to: '/dashboard/users', icon: User2, title: 'Users' },
+            { to: '/dashboard/dashboard/Deliveries', icon: Ship, title: 'Deliveries' },
+            { to: '/dashboard/reports', icon: Book, title: 'Reports' },
+            { to: '/dashboard/settings', icon: Settings, title: 'Settings' },
         ]
     },
     {
