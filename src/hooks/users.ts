@@ -1,21 +1,24 @@
-import { useMutation } from "@tanstack/react-query"
+// hooks/users.ts
+import { useQuery } from "@tanstack/react-query"
+import { getUserByRole } from "@/api/users"
 
 export const useUsers = () => {
-    return useMutation({
-        mutationKey: ['users'],
-        mutationFn: async () => {
+    return useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
             const res = await fetch('/api/users')
             if (!res.ok) {
                 throw new Error('Failed to fetch users')
             }
             return res.json()
-        },
-        onSuccess: (data) => {
-            console.log('Fetched users:', data)
-            return data
-        },
-        onError: (error) => {
-            console.error('Failed to fetch users:', error)
         }
+    })
+}
+
+export const useGetUserByRole = (role: string) => {
+    return useQuery({
+        queryKey: ['usersByRole', role],
+        queryFn: () => getUserByRole(role),
+        enabled: !!role, // Only fetch if role is provided
     })
 }

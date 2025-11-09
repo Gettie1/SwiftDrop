@@ -15,8 +15,8 @@ export interface LoginResponse {
         role: Role | string;
     };
     isAuthenticated: boolean;
-    accessToken?: string;
-    refreshToken?: string;
+    access_token?: string;
+    refresh_token?: string;
 }
 export interface RegisterData {
     firstName: string;

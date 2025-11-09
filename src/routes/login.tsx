@@ -39,8 +39,8 @@ function RouteComponent() {
           authActions.setUser({
             isAuthenticated: data.isAuthenticated,
             user: data.user,
-            accessToken: data.accessToken,
-            refreshToken: data.refreshToken,
+            access_token: data.access_token,
+            refresh_token: data.refresh_token,
           })
           toast.success(`Login successful!, Welcome, ${data.user.username}!`)
           router.navigate({ to: '/dashboard/dashboard/' as any })

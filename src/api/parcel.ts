@@ -4,7 +4,7 @@ import type { ParcelData } from '@/types/parce'
 const url = 'http://localhost:4001'
 
 export const createParcel = async (parcelData: ParcelData) => {
-  const response = await fetch(`${url}/parcels`, {
+  const response = await fetch(`${url}/parcel`, {
     method: 'POST',
     headers: getHeaders(),
     body: JSON.stringify(parcelData),
@@ -16,7 +16,7 @@ export const createParcel = async (parcelData: ParcelData) => {
 }
 
 export const getParcelById = async (parcelId: string) => {
-  const response = await fetch(`${url}/parcels/${parcelId}`, {
+  const response = await fetch(`${url}/parcel/${parcelId}`, {
     method: 'GET',
     headers: getHeaders(),
   })
@@ -27,7 +27,7 @@ export const getParcelById = async (parcelId: string) => {
 }
 
 export const getAllParcels = async () => {
-  const response = await fetch(`${url}/parcels`, {
+  const response = await fetch(`${url}/parcel`, {
     method: 'GET',
     headers: getHeaders(),
   })
@@ -41,7 +41,7 @@ export const updateParcelStatus = async (
   parcelId: string,
   status: string,
 ) => {
-  const response = await fetch(`${url}/parcels/${parcelId}`, {
+  const response = await fetch(`${url}/parcel/${parcelId}`, {
     method: 'PUT',
     headers: getHeaders(),
     body: JSON.stringify({ status }),
@@ -56,7 +56,7 @@ export const assignCourierToParcel = async (
     parcelId: string,
     courierId: string,
 ) => {
-    const response = await fetch(`${url}/parcels/${parcelId}/assign-courier`, {
+    const response = await fetch(`${url}/parcel/${parcelId}/assign-courier`, {
         method: 'POST',
         headers: getHeaders(),
         body: JSON.stringify({ courierId }),

@@ -58,3 +58,13 @@ export const deleteUser = async (id: string) => {
   }
   return response.json()
 }
+export const getUserByRole = async (role: string) => {
+  const response = await fetch(`${url}/users/role/${role}`, {
+    method: 'GET',
+    headers: getHeaders(),
+  })
+  if (!response.ok) {
+    throw new Error('Failed to fetch users by role')
+  }
+  return response.json()
+} 

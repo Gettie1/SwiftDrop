@@ -4,7 +4,7 @@ import { AuthStore } from "@/store/authStore";
 const url = 'http://localhost:4001';
 
 export const getHeaders = () => {
-  const token = AuthStore.state.accessToken;
+  const token = AuthStore.state.access_token;
   return {
     'Content-Type': 'application/json',
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
@@ -22,8 +22,9 @@ export const login = async (data: loginData) => {
   if (!response.ok) {
     throw new Error('Login failed');
   }
-
-  return response.json();
+ const result = await response.json();
+ console.log('Login response:', result);
+  return result;
 };
 
 // ✅ Register (create user → then profile)

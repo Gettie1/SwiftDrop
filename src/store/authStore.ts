@@ -9,6 +9,8 @@ const initialState: LoginResponse = {
         email: '',
         role: ''
     },
+    access_token: undefined,
+    refresh_token: undefined,
 };
 export const AuthStore: Store<LoginResponse> = new Store<LoginResponse>(initialState);
 export const authActions = {
@@ -19,7 +21,9 @@ export const authActions = {
                 ...data.user,
                 role: typeof data.user.role === 'string' ? data.user.role.toLowerCase() : data.user.role,
                 
-            },
+            },  
+            access_token: data.access_token,
+            refresh_token: data.refresh_token,
         };
         AuthStore.setState(processedData);
         localStorage.setItem('auth', JSON.stringify(processedData));
