@@ -16,7 +16,12 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardDashboardRouteImport } from './routes/dashboard/dashboard'
 import { Route as DashboardDashboardIndexRouteImport } from './routes/dashboard/dashboard/index'
+import { Route as DashboardDashboardUsersRouteImport } from './routes/dashboard/dashboard/users'
+import { Route as DashboardDashboardProfileRouteImport } from './routes/dashboard/dashboard/profile'
 import { Route as DashboardDashboardDeliveriesRouteImport } from './routes/dashboard/dashboard/Deliveries'
+import { Route as DashboardDashboardCustomerPaymentsRouteImport } from './routes/dashboard/dashboard/customer/payments'
+import { Route as DashboardDashboardCustomerOrdersRouteImport } from './routes/dashboard/dashboard/customer/orders'
+import { Route as DashboardDashboardCustomerCartRouteImport } from './routes/dashboard/dashboard/customer/cart'
 
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
@@ -53,10 +58,39 @@ const DashboardDashboardIndexRoute = DashboardDashboardIndexRouteImport.update({
   path: '/',
   getParentRoute: () => DashboardDashboardRoute,
 } as any)
+const DashboardDashboardUsersRoute = DashboardDashboardUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => DashboardDashboardRoute,
+} as any)
+const DashboardDashboardProfileRoute =
+  DashboardDashboardProfileRouteImport.update({
+    id: '/profile',
+    path: '/profile',
+    getParentRoute: () => DashboardDashboardRoute,
+  } as any)
 const DashboardDashboardDeliveriesRoute =
   DashboardDashboardDeliveriesRouteImport.update({
     id: '/Deliveries',
     path: '/Deliveries',
+    getParentRoute: () => DashboardDashboardRoute,
+  } as any)
+const DashboardDashboardCustomerPaymentsRoute =
+  DashboardDashboardCustomerPaymentsRouteImport.update({
+    id: '/customer/payments',
+    path: '/customer/payments',
+    getParentRoute: () => DashboardDashboardRoute,
+  } as any)
+const DashboardDashboardCustomerOrdersRoute =
+  DashboardDashboardCustomerOrdersRouteImport.update({
+    id: '/customer/orders',
+    path: '/customer/orders',
+    getParentRoute: () => DashboardDashboardRoute,
+  } as any)
+const DashboardDashboardCustomerCartRoute =
+  DashboardDashboardCustomerCartRouteImport.update({
+    id: '/customer/cart',
+    path: '/customer/cart',
     getParentRoute: () => DashboardDashboardRoute,
   } as any)
 
@@ -68,7 +102,12 @@ export interface FileRoutesByFullPath {
   '/register': typeof RegisterRoute
   '/dashboard/dashboard': typeof DashboardDashboardRouteWithChildren
   '/dashboard/dashboard/Deliveries': typeof DashboardDashboardDeliveriesRoute
+  '/dashboard/dashboard/profile': typeof DashboardDashboardProfileRoute
+  '/dashboard/dashboard/users': typeof DashboardDashboardUsersRoute
   '/dashboard/dashboard/': typeof DashboardDashboardIndexRoute
+  '/dashboard/dashboard/customer/cart': typeof DashboardDashboardCustomerCartRoute
+  '/dashboard/dashboard/customer/orders': typeof DashboardDashboardCustomerOrdersRoute
+  '/dashboard/dashboard/customer/payments': typeof DashboardDashboardCustomerPaymentsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -77,7 +116,12 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/dashboard/dashboard/Deliveries': typeof DashboardDashboardDeliveriesRoute
+  '/dashboard/dashboard/profile': typeof DashboardDashboardProfileRoute
+  '/dashboard/dashboard/users': typeof DashboardDashboardUsersRoute
   '/dashboard/dashboard': typeof DashboardDashboardIndexRoute
+  '/dashboard/dashboard/customer/cart': typeof DashboardDashboardCustomerCartRoute
+  '/dashboard/dashboard/customer/orders': typeof DashboardDashboardCustomerOrdersRoute
+  '/dashboard/dashboard/customer/payments': typeof DashboardDashboardCustomerPaymentsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -88,7 +132,12 @@ export interface FileRoutesById {
   '/register': typeof RegisterRoute
   '/dashboard/dashboard': typeof DashboardDashboardRouteWithChildren
   '/dashboard/dashboard/Deliveries': typeof DashboardDashboardDeliveriesRoute
+  '/dashboard/dashboard/profile': typeof DashboardDashboardProfileRoute
+  '/dashboard/dashboard/users': typeof DashboardDashboardUsersRoute
   '/dashboard/dashboard/': typeof DashboardDashboardIndexRoute
+  '/dashboard/dashboard/customer/cart': typeof DashboardDashboardCustomerCartRoute
+  '/dashboard/dashboard/customer/orders': typeof DashboardDashboardCustomerOrdersRoute
+  '/dashboard/dashboard/customer/payments': typeof DashboardDashboardCustomerPaymentsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -100,7 +149,12 @@ export interface FileRouteTypes {
     | '/register'
     | '/dashboard/dashboard'
     | '/dashboard/dashboard/Deliveries'
+    | '/dashboard/dashboard/profile'
+    | '/dashboard/dashboard/users'
     | '/dashboard/dashboard/'
+    | '/dashboard/dashboard/customer/cart'
+    | '/dashboard/dashboard/customer/orders'
+    | '/dashboard/dashboard/customer/payments'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -109,7 +163,12 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/dashboard/dashboard/Deliveries'
+    | '/dashboard/dashboard/profile'
+    | '/dashboard/dashboard/users'
     | '/dashboard/dashboard'
+    | '/dashboard/dashboard/customer/cart'
+    | '/dashboard/dashboard/customer/orders'
+    | '/dashboard/dashboard/customer/payments'
   id:
     | '__root__'
     | '/'
@@ -119,7 +178,12 @@ export interface FileRouteTypes {
     | '/register'
     | '/dashboard/dashboard'
     | '/dashboard/dashboard/Deliveries'
+    | '/dashboard/dashboard/profile'
+    | '/dashboard/dashboard/users'
     | '/dashboard/dashboard/'
+    | '/dashboard/dashboard/customer/cart'
+    | '/dashboard/dashboard/customer/orders'
+    | '/dashboard/dashboard/customer/payments'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -182,6 +246,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardDashboardIndexRouteImport
       parentRoute: typeof DashboardDashboardRoute
     }
+    '/dashboard/dashboard/users': {
+      id: '/dashboard/dashboard/users'
+      path: '/users'
+      fullPath: '/dashboard/dashboard/users'
+      preLoaderRoute: typeof DashboardDashboardUsersRouteImport
+      parentRoute: typeof DashboardDashboardRoute
+    }
+    '/dashboard/dashboard/profile': {
+      id: '/dashboard/dashboard/profile'
+      path: '/profile'
+      fullPath: '/dashboard/dashboard/profile'
+      preLoaderRoute: typeof DashboardDashboardProfileRouteImport
+      parentRoute: typeof DashboardDashboardRoute
+    }
     '/dashboard/dashboard/Deliveries': {
       id: '/dashboard/dashboard/Deliveries'
       path: '/Deliveries'
@@ -189,17 +267,49 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardDashboardDeliveriesRouteImport
       parentRoute: typeof DashboardDashboardRoute
     }
+    '/dashboard/dashboard/customer/payments': {
+      id: '/dashboard/dashboard/customer/payments'
+      path: '/customer/payments'
+      fullPath: '/dashboard/dashboard/customer/payments'
+      preLoaderRoute: typeof DashboardDashboardCustomerPaymentsRouteImport
+      parentRoute: typeof DashboardDashboardRoute
+    }
+    '/dashboard/dashboard/customer/orders': {
+      id: '/dashboard/dashboard/customer/orders'
+      path: '/customer/orders'
+      fullPath: '/dashboard/dashboard/customer/orders'
+      preLoaderRoute: typeof DashboardDashboardCustomerOrdersRouteImport
+      parentRoute: typeof DashboardDashboardRoute
+    }
+    '/dashboard/dashboard/customer/cart': {
+      id: '/dashboard/dashboard/customer/cart'
+      path: '/customer/cart'
+      fullPath: '/dashboard/dashboard/customer/cart'
+      preLoaderRoute: typeof DashboardDashboardCustomerCartRouteImport
+      parentRoute: typeof DashboardDashboardRoute
+    }
   }
 }
 
 interface DashboardDashboardRouteChildren {
   DashboardDashboardDeliveriesRoute: typeof DashboardDashboardDeliveriesRoute
+  DashboardDashboardProfileRoute: typeof DashboardDashboardProfileRoute
+  DashboardDashboardUsersRoute: typeof DashboardDashboardUsersRoute
   DashboardDashboardIndexRoute: typeof DashboardDashboardIndexRoute
+  DashboardDashboardCustomerCartRoute: typeof DashboardDashboardCustomerCartRoute
+  DashboardDashboardCustomerOrdersRoute: typeof DashboardDashboardCustomerOrdersRoute
+  DashboardDashboardCustomerPaymentsRoute: typeof DashboardDashboardCustomerPaymentsRoute
 }
 
 const DashboardDashboardRouteChildren: DashboardDashboardRouteChildren = {
   DashboardDashboardDeliveriesRoute: DashboardDashboardDeliveriesRoute,
+  DashboardDashboardProfileRoute: DashboardDashboardProfileRoute,
+  DashboardDashboardUsersRoute: DashboardDashboardUsersRoute,
   DashboardDashboardIndexRoute: DashboardDashboardIndexRoute,
+  DashboardDashboardCustomerCartRoute: DashboardDashboardCustomerCartRoute,
+  DashboardDashboardCustomerOrdersRoute: DashboardDashboardCustomerOrdersRoute,
+  DashboardDashboardCustomerPaymentsRoute:
+    DashboardDashboardCustomerPaymentsRoute,
 }
 
 const DashboardDashboardRouteWithChildren =

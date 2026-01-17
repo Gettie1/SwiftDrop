@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query"
 import { getAllProfiles, getProfileByUserId, getUpdateProfile } from "@/api/profiles"
 
-export const useProfile = () => {
+export const useProfile = (user?:string) => {
     return useMutation({
-        mutationKey: ['profile'],
+        mutationKey: ['profile', user],
         mutationFn: getProfileByUserId,
         onSuccess: (data) => {
             console.log('Fetched profile:', data)

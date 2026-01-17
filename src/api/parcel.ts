@@ -1,5 +1,5 @@
 import { getHeaders } from './auth'
-import type { ParcelData } from '@/types/parce'
+import type { ParcelData } from '@/types/parcel'
 
 const url = 'http://localhost:4001'
 
@@ -31,16 +31,13 @@ export const getAllParcels = async () => {
     method: 'GET',
     headers: getHeaders(),
   })
-    if (!response.ok) {
+  if (!response.ok) {
     throw new Error('Failed to fetch parcels')
   }
   return response.json()
 }
 
-export const updateParcelStatus = async (
-  parcelId: string,
-  status: string,
-) => {
+export const updateParcelStatus = async (parcelId: string, status: string) => {
   const response = await fetch(`${url}/parcel/${parcelId}`, {
     method: 'PUT',
     headers: getHeaders(),
@@ -53,16 +50,16 @@ export const updateParcelStatus = async (
 }
 
 export const assignCourierToParcel = async (
-    parcelId: string,
-    courierId: string,
+  parcelId: string,
+  courierId: string,
 ) => {
-    const response = await fetch(`${url}/parcel/${parcelId}/assign-courier`, {
-        method: 'POST',
-        headers: getHeaders(),
-        body: JSON.stringify({ courierId }),
-    })
-    if (!response.ok) {
-        throw new Error('Failed to assign courier to parcel')
-    }
-    return response.json()
+  const response = await fetch(`${url}/parcel/${parcelId}/assign-courier`, {
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify({ courierId }),
+  })
+  if (!response.ok) {
+    throw new Error('Failed to assign courier to parcel')
+  }
+  return response.json()
 }

@@ -7,7 +7,7 @@ const initialState: LoginResponse = {
         id: '',
         username: '',
         email: '',
-        role: ''
+        role: '',
     },
     access_token: undefined,
     refresh_token: undefined,

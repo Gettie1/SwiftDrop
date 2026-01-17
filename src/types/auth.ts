@@ -13,6 +13,10 @@ export interface LoginResponse {
         username: string;
         email: string;
         role: Role | string;
+        // address?: string | null;
+        // firstName?: string | null;
+        // lastName?: string | null;
+        // phoneNumber?: string | null;
     };
     isAuthenticated: boolean;
     access_token?: string;
@@ -26,5 +30,16 @@ export interface RegisterData {
     username: string;
     email: string;
     password: string;
+    role: Role | string;
+}
+export interface Profile {
+    id: string;
+    userId: string;
+    firstName: string;
+    lastName: string;
+    phone: string;
+    username: string;
+    email: string;
+    address: string;
     role: Role | string;
 }

@@ -10,7 +10,7 @@ export const Navbar: React.FC = () => {
           <h1 className="text-2xl font-extrabold flex items-center gap-2 mr-6">
             <span className="text-blue-500">🚗</span>
             <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-600 bg-clip-text text-transparent drop-shadow">
-              CleanRide
+              SwiftDrop
             </span>
           </h1>
         <Link to='/' className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-600 bg-clip-text text-transparent drop-shadow font-bold text-lg hover:underline">

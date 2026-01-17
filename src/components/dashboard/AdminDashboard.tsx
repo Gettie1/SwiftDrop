@@ -18,14 +18,17 @@ function AdminDashboard() {
   console.log('eee',AuthStore.state);
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
+      {/* <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1> */}
       {/* first letter uppercase */}
-      <p>Welcome, {user.username.charAt(0).toUpperCase() + user.username.slice(1)} 👑!</p>
+      <p className="font-bold">Welcome, {user.username.charAt(0).toUpperCase() + user.username.slice(1)} 👑!</p>
+      <p className="text-center">Here is the summary of your activities:</p>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
         <StatCard icon={<User />} title="Total Users" value={totalUsers} />
         <StatCard icon={<Ship />} title="Total Deliveries" value={totalDeliveries} />
         <StatCard icon={<User />} title="Total Couriers" value={couriers?.length || 0} />
       </div>
+      {/* graph showing deliveries against status */}
+      
     </div>
   )
 }
