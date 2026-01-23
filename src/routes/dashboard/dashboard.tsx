@@ -7,7 +7,7 @@ import Footer from "@/components/Footer"
 export const Route = createFileRoute('/dashboard/dashboard')({
   component: RouteComponent,
 })
-export function RouteComponent() {
+function RouteComponent() {
    return <div className="flex flex-col h-screen">
       <Navbar />
       <div className="flex flex-1">

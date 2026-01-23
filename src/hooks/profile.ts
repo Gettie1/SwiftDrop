@@ -1,41 +1,25 @@
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQuery } from "@tanstack/react-query"
 import { getAllProfiles, getProfileByUserId, getUpdateProfile } from "@/api/profiles"
 
 export const useProfile = (user?:string) => {
-    return useMutation({
-        mutationKey: ['profile', user],
-        mutationFn: getProfileByUserId,
-        onSuccess: (data) => {
-            console.log('Fetched profile:', data)
-        },
-        onError: (error) => {
-            console.error('Failed to fetch profile:', error)
-        }
+    return useQuery({
+        queryKey: ['profile', user],
+        queryFn: () => getProfileByUserId(user!),
+        enabled: !!user, // Only run the query if userId is provided
     })
 }
 
 export const useProfiles = () => {
-    return useMutation({
-        mutationKey: ['profiles'],
-        mutationFn: getAllProfiles,
-        onSuccess: (data) => {
-            console.log('Fetched profiles:', data)
-        },
-        onError: (error) => {
-            console.error('Failed to fetch profiles:', error)
-        }
+    return useQuery({
+        queryKey: ['profiles'],
+        queryFn: getAllProfiles
     })
+
 }
 
 export const useUpdateProfile = () => {
-    return useMutation<any, unknown, [string, Partial<any>]>({
-        mutationKey: ['updateProfile'],
-        mutationFn: ([profileId, profileData]) => getUpdateProfile(profileId, profileData),
-        onSuccess: (data) => {
-            console.log('Profile updated successfully:', data)
-        },
-        onError: (error) => {
-            console.error('Failed to update profile:', error)
-        }
+    return useMutation({
+        mutationFn: ({profileId, profileData}: {profileId: string, profileData: Partial<any>}) => 
+            getUpdateProfile(profileId, profileData)
     })
 }

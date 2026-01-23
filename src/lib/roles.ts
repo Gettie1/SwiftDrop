@@ -9,7 +9,7 @@ const navLinks = [
             { to: '/dashboard/dashboard/users', icon: User2, title: 'Users' },
             { to: '/dashboard/dashboard/Deliveries', icon: Ship, title: 'Deliveries' },
             { to: '/dashboard/reports', icon: Book, title: 'Reports' },
-            { to: '/dashboard/settings', icon: Settings, title: 'Settings' },
+            { to: '/dashboard/dashboard/settings', icon: Settings, title: 'Settings' },
         ]
     },
     {
@@ -20,7 +20,7 @@ const navLinks = [
             { to: '/dashboard/dashboard/profile', icon: User2, title: 'Profile' },
             { to: '/dashboard/dashboard/customer/payments', icon: Ship, title: 'Payments' },
             { to: '/dashboard/dashboard/customer/notifications', icon: Bell, title: 'Notifications' },
-            { to: '/dashboard/dashboard/customer/settings', icon: Settings, title: 'Settings' },
+            { to: '/dashboard/dashboard/settings', icon: Settings, title: 'Settings' },
         ]
     },
     {
@@ -31,7 +31,7 @@ const navLinks = [
             { to: '/dashboard/dashboard/courier/deliveries', icon: Home, title: 'Deliveries' },
             { to: '/dashboard/dashboard/profile', icon: Home, title: 'Profile' },
             { to: '/dashboard/dashboard/courier/notifications', icon: Home, title: 'Notifications' },
-            { to: '/dashboard/dashboard/courier/settings', icon: Settings, title: 'Settings' },
+            { to: '/dashboard/dashboard/settings', icon: Settings, title: 'Settings' },
         ]
     }
 ];

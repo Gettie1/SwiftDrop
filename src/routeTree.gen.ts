@@ -17,6 +17,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardDashboardRouteImport } from './routes/dashboard/dashboard'
 import { Route as DashboardDashboardIndexRouteImport } from './routes/dashboard/dashboard/index'
 import { Route as DashboardDashboardUsersRouteImport } from './routes/dashboard/dashboard/users'
+import { Route as DashboardDashboardSettingsRouteImport } from './routes/dashboard/dashboard/settings'
 import { Route as DashboardDashboardProfileRouteImport } from './routes/dashboard/dashboard/profile'
 import { Route as DashboardDashboardDeliveriesRouteImport } from './routes/dashboard/dashboard/Deliveries'
 import { Route as DashboardDashboardCustomerPaymentsRouteImport } from './routes/dashboard/dashboard/customer/payments'
@@ -63,6 +64,12 @@ const DashboardDashboardUsersRoute = DashboardDashboardUsersRouteImport.update({
   path: '/users',
   getParentRoute: () => DashboardDashboardRoute,
 } as any)
+const DashboardDashboardSettingsRoute =
+  DashboardDashboardSettingsRouteImport.update({
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => DashboardDashboardRoute,
+  } as any)
 const DashboardDashboardProfileRoute =
   DashboardDashboardProfileRouteImport.update({
     id: '/profile',
@@ -103,6 +110,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/dashboard': typeof DashboardDashboardRouteWithChildren
   '/dashboard/dashboard/Deliveries': typeof DashboardDashboardDeliveriesRoute
   '/dashboard/dashboard/profile': typeof DashboardDashboardProfileRoute
+  '/dashboard/dashboard/settings': typeof DashboardDashboardSettingsRoute
   '/dashboard/dashboard/users': typeof DashboardDashboardUsersRoute
   '/dashboard/dashboard/': typeof DashboardDashboardIndexRoute
   '/dashboard/dashboard/customer/cart': typeof DashboardDashboardCustomerCartRoute
@@ -117,6 +125,7 @@ export interface FileRoutesByTo {
   '/register': typeof RegisterRoute
   '/dashboard/dashboard/Deliveries': typeof DashboardDashboardDeliveriesRoute
   '/dashboard/dashboard/profile': typeof DashboardDashboardProfileRoute
+  '/dashboard/dashboard/settings': typeof DashboardDashboardSettingsRoute
   '/dashboard/dashboard/users': typeof DashboardDashboardUsersRoute
   '/dashboard/dashboard': typeof DashboardDashboardIndexRoute
   '/dashboard/dashboard/customer/cart': typeof DashboardDashboardCustomerCartRoute
@@ -133,6 +142,7 @@ export interface FileRoutesById {
   '/dashboard/dashboard': typeof DashboardDashboardRouteWithChildren
   '/dashboard/dashboard/Deliveries': typeof DashboardDashboardDeliveriesRoute
   '/dashboard/dashboard/profile': typeof DashboardDashboardProfileRoute
+  '/dashboard/dashboard/settings': typeof DashboardDashboardSettingsRoute
   '/dashboard/dashboard/users': typeof DashboardDashboardUsersRoute
   '/dashboard/dashboard/': typeof DashboardDashboardIndexRoute
   '/dashboard/dashboard/customer/cart': typeof DashboardDashboardCustomerCartRoute
@@ -150,6 +160,7 @@ export interface FileRouteTypes {
     | '/dashboard/dashboard'
     | '/dashboard/dashboard/Deliveries'
     | '/dashboard/dashboard/profile'
+    | '/dashboard/dashboard/settings'
     | '/dashboard/dashboard/users'
     | '/dashboard/dashboard/'
     | '/dashboard/dashboard/customer/cart'
@@ -164,6 +175,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/dashboard/dashboard/Deliveries'
     | '/dashboard/dashboard/profile'
+    | '/dashboard/dashboard/settings'
     | '/dashboard/dashboard/users'
     | '/dashboard/dashboard'
     | '/dashboard/dashboard/customer/cart'
@@ -179,6 +191,7 @@ export interface FileRouteTypes {
     | '/dashboard/dashboard'
     | '/dashboard/dashboard/Deliveries'
     | '/dashboard/dashboard/profile'
+    | '/dashboard/dashboard/settings'
     | '/dashboard/dashboard/users'
     | '/dashboard/dashboard/'
     | '/dashboard/dashboard/customer/cart'
@@ -253,6 +266,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardDashboardUsersRouteImport
       parentRoute: typeof DashboardDashboardRoute
     }
+    '/dashboard/dashboard/settings': {
+      id: '/dashboard/dashboard/settings'
+      path: '/settings'
+      fullPath: '/dashboard/dashboard/settings'
+      preLoaderRoute: typeof DashboardDashboardSettingsRouteImport
+      parentRoute: typeof DashboardDashboardRoute
+    }
     '/dashboard/dashboard/profile': {
       id: '/dashboard/dashboard/profile'
       path: '/profile'
@@ -294,6 +314,7 @@ declare module '@tanstack/react-router' {
 interface DashboardDashboardRouteChildren {
   DashboardDashboardDeliveriesRoute: typeof DashboardDashboardDeliveriesRoute
   DashboardDashboardProfileRoute: typeof DashboardDashboardProfileRoute
+  DashboardDashboardSettingsRoute: typeof DashboardDashboardSettingsRoute
   DashboardDashboardUsersRoute: typeof DashboardDashboardUsersRoute
   DashboardDashboardIndexRoute: typeof DashboardDashboardIndexRoute
   DashboardDashboardCustomerCartRoute: typeof DashboardDashboardCustomerCartRoute
@@ -304,6 +325,7 @@ interface DashboardDashboardRouteChildren {
 const DashboardDashboardRouteChildren: DashboardDashboardRouteChildren = {
   DashboardDashboardDeliveriesRoute: DashboardDashboardDeliveriesRoute,
   DashboardDashboardProfileRoute: DashboardDashboardProfileRoute,
+  DashboardDashboardSettingsRoute: DashboardDashboardSettingsRoute,
   DashboardDashboardUsersRoute: DashboardDashboardUsersRoute,
   DashboardDashboardIndexRoute: DashboardDashboardIndexRoute,
   DashboardDashboardCustomerCartRoute: DashboardDashboardCustomerCartRoute,

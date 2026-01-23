@@ -1,7 +1,7 @@
 import type { RegisterData, loginData } from "@/types/auth";
 import { AuthStore } from "@/store/authStore";
 
-const url = 'http://localhost:4001';
+export const url = 'http://localhost:4001';
 
 export const getHeaders = () => {
   const token = AuthStore.state.access_token;

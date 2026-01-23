@@ -12,7 +12,7 @@ export interface ProfileData {
 }
 
 export const createProfile = async (profileData: ProfileData) => {
-  const response = await fetch(`${url}/profiles`, {
+  const response = await fetch(`${url}/profile`, {
     method: 'POST',
     headers: getHeaders(),
     body: JSON.stringify(profileData),
@@ -24,7 +24,7 @@ export const createProfile = async (profileData: ProfileData) => {
 }
 
 export const getProfileByUserId = async (userId: string) => {
-  const response = await fetch(`${url}/profiles/user/${userId}`, {
+  const response = await fetch(`${url}/profile/user/${userId}`, {
     method: 'GET',
     headers: getHeaders(),
   })
@@ -35,7 +35,7 @@ export const getProfileByUserId = async (userId: string) => {
 }
 
 export const getAllProfiles = async () => {
-  const response = await fetch(`${url}/profiles`, {
+  const response = await fetch(`${url}/profile`, {
     method: 'GET',
     headers: getHeaders(),
   })
@@ -49,7 +49,7 @@ export const getUpdateProfile = async (
   profileId: string,
   profileData: Partial<ProfileData>,
 ) => {
-  const response = await fetch(`${url}/profiles/${profileId}`, {
+  const response = await fetch(`${url}/profile/${profileId}`, {
     method: 'PUT',
     headers: getHeaders(),
     body: JSON.stringify(profileData),
@@ -61,7 +61,7 @@ export const getUpdateProfile = async (
 }
 
 export const deleteProfile = async (profileId: string) => {
-  const response = await fetch(`${url}/profiles/${profileId}`, {
+  const response = await fetch(`${url}/profile/${profileId}`, {
     method: 'DELETE',
     headers: getHeaders(),
   })
